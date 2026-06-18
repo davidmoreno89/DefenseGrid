@@ -1,7 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { TileGrid } from './TileGrid';
-import { TrainingCube } from './TrainingCube';
+import { TileGrid } from './grid/TileGrid';
 
 export function LessonScene() {
   return (
@@ -19,7 +18,6 @@ export function LessonScene() {
       <directionalLight position={[4, 6, 3]} intensity={2} />
 
       <TileGrid />
-      <TrainingCube />
 
       <OrbitControls />
     </Canvas>
