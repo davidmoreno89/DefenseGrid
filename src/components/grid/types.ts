@@ -8,8 +8,8 @@ export enum TileType {
 }
 
 export type GridTile = {
-  gridXCoordinate: number;
-  gridZCoordinate: number;
+  gridXValue: number;
+  gridZValue: number;
   worldPosition: Position3D;
   tileType: TileType;
 };

@@ -3,22 +3,24 @@ import { type GridTile, TileType } from './types';
 
 export const getTileType = (
   levelDefinition: LevelDefinition,
-  gridXCoordinate: number,
-  gridZCoordinate: number,
+  gridXValue: number,
+  gridZValue: number,
 ): TileType => {
-  const { entranceCoordinate, resourceCoordinate, startingTowerCoordinates } = levelDefinition;
-  const isStartingTowerCoordinate = startingTowerCoordinates.some(
-    (startingTowerCoordinate) =>
-      startingTowerCoordinate.x === gridXCoordinate &&
-      startingTowerCoordinate.z === gridZCoordinate,
+  const {
+    entranceCoordinate: entrance,
+    resourceCoordinate: resource,
+    startingTowerCoordinates: towers,
+  } = levelDefinition;
+  const isStartingTowerCoordinate = towers.some(
+    (tower) => tower.x === gridXValue && tower.z === gridZValue,
   );
   if (isStartingTowerCoordinate) {
     return TileType.TOWER;
   }
-  if (gridXCoordinate === entranceCoordinate.x && gridZCoordinate === entranceCoordinate.z) {
+  if (gridXValue === entrance.x && gridZValue === entrance.z) {
     return TileType.ENTRANCE;
   }
-  if (gridXCoordinate === resourceCoordinate.x && gridZCoordinate === resourceCoordinate.z) {
+  if (gridXValue === resource.x && gridZValue === resource.z) {
     return TileType.RESOURCE;
   }
   return TileType.OPEN;
@@ -38,8 +40,8 @@ export const generateGridTiles = (levelDefinition: LevelDefinition): GridTile[] 
 
   return gridAxisValues.flatMap((gridZValue) =>
     gridAxisValues.map((gridXValue) => ({
-      gridXCoordinate: gridXValue,
-      gridZCoordinate: gridZValue,
+      gridXValue: gridXValue,
+      gridZValue: gridZValue,
       worldPosition: [gridXValue * tileSpacing, 0, gridZValue * tileSpacing],
       tileType: getTileType(levelDefinition, gridXValue, gridZValue),
     })),

@@ -44,8 +44,8 @@ describe('generateGridTiles', () => {
 
     expect(generatedTiles).toContainEqual(
       expect.objectContaining({
-        gridXCoordinate: 1,
-        gridZCoordinate: 1,
+        gridXValue: 1,
+        gridZValue: 1,
         worldPosition: [1.1, 0, 1.1],
       }),
     );
@@ -54,8 +54,8 @@ describe('generateGridTiles', () => {
   test('uses the level definition when assigning tile types', () => {
     expect(generateGridTiles(testLevel)).toContainEqual(
       expect.objectContaining({
-        gridXCoordinate: 2,
-        gridZCoordinate: 0,
+        gridXValue: 2,
+        gridZValue: 0,
         tileType: TileType.RESOURCE,
       }),
     );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { levelOne } from '../../game/levels/levelOne';
 import { Tile } from '../Tile';
 import { generateGridTiles } from './grid';
@@ -18,11 +18,8 @@ function getTileColor(tileType: TileType) {
 }
 
 export function TileGrid() {
-  const [gridTiles, setGridTiles] = useState<GridTile[]>([]);
-
-  useEffect(() => {
-    setGridTiles(generateGridTiles(levelOne));
-  }, []);
+  const initalGridTiles = generateGridTiles(levelOne);
+  const [gridTiles, setGridTiles] = useState<GridTile[]>(initalGridTiles);
 
   const clickHandler = (gridTile: GridTile) => {
     if (gridTile.tileType === TileType.OPEN) {
@@ -32,8 +29,8 @@ export function TileGrid() {
       };
       setGridTiles((prevGridTiles) =>
         prevGridTiles.map((prevGridTile) =>
-          prevGridTile.gridXCoordinate === gridTile.gridXCoordinate &&
-          prevGridTile.gridZCoordinate === gridTile.gridZCoordinate
+          prevGridTile.gridXValue === gridTile.gridXValue &&
+          prevGridTile.gridZValue === gridTile.gridZValue
             ? newTowerTile
             : prevGridTile,
         ),
@@ -45,7 +42,7 @@ export function TileGrid() {
     <>
       {gridTiles.map((gridTile) => (
         <Tile
-          key={`${gridTile.gridXCoordinate}-${gridTile.gridZCoordinate}`}
+          key={`${gridTile.gridXValue}-${gridTile.gridZValue}`}
           position={gridTile.worldPosition}
           onClick={() => clickHandler(gridTile)}
           color={getTileColor(gridTile.tileType)}
