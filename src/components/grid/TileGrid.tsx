@@ -14,6 +14,9 @@ function getTileColor(tileType: TileType) {
   if (tileType === TileType.TOWER) {
     return '#5de39a';
   }
+  if (tileType === TileType.EXIT) {
+    return '#f2a365';
+  }
   return '#26313d';
 }
 

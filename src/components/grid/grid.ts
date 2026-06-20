@@ -1,5 +1,9 @@
-import type { LevelDefinition } from '../../game/types';
+import type { GridCoordinate, LevelDefinition } from '../../game/types';
 import { type GridTile, TileType } from './types';
+
+const isCoordinateInArray = (coordinates: GridCoordinate[], x: number, z: number): boolean => {
+  return coordinates.some((coordinate) => coordinate.x === x && coordinate.z === z);
+};
 
 export const getTileType = (
   levelDefinition: LevelDefinition,
@@ -7,21 +11,22 @@ export const getTileType = (
   gridZValue: number,
 ): TileType => {
   const {
-    entranceCoordinate: entrance,
-    resourceCoordinate: resource,
+    entranceCoordinates: entrance,
+    resourceCoordinates: resource,
+    exitCoordinates: exit,
     startingTowerCoordinates: towers,
   } = levelDefinition;
-  const isStartingTowerCoordinate = towers.some(
-    (tower) => tower.x === gridXValue && tower.z === gridZValue,
-  );
-  if (isStartingTowerCoordinate) {
+  if (isCoordinateInArray(towers, gridXValue, gridZValue)) {
     return TileType.TOWER;
   }
-  if (gridXValue === entrance.x && gridZValue === entrance.z) {
+  if (isCoordinateInArray(entrance, gridXValue, gridZValue)) {
     return TileType.ENTRANCE;
   }
-  if (gridXValue === resource.x && gridZValue === resource.z) {
+  if (isCoordinateInArray(resource, gridXValue, gridZValue)) {
     return TileType.RESOURCE;
+  }
+  if (isCoordinateInArray(exit, gridXValue, gridZValue)) {
+    return TileType.EXIT;
   }
   return TileType.OPEN;
 };

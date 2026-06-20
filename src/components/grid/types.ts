@@ -5,6 +5,7 @@ export enum TileType {
   ENTRANCE = 'entrance',
   RESOURCE = 'resource',
   TOWER = 'tower',
+  EXIT = 'exit',
 }
 
 export type GridTile = {

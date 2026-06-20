@@ -1,9 +1,10 @@
 import type { LevelDefinition } from '../types';
 
 export const levelOne: LevelDefinition = {
-  gridRadius: 2,
-  entranceCoordinate: { x: -2, z: 0 },
-  resourceCoordinate: { x: 2, z: 0 },
+  gridRadius: 3,
+  entranceCoordinates: [{ x: -3, z: -1 }],
+  resourceCoordinates: [{ x: 3, z: 0 }],
+  exitCoordinates: [{ x: -3, z: 1 }],
   startingTowerCoordinates: [
     { x: 0, z: -2 },
     { x: 0, z: 2 },

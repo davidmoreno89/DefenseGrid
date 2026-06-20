@@ -5,8 +5,9 @@ import { TileType } from './types';
 
 const testLevel: LevelDefinition = {
   gridRadius: 2,
-  entranceCoordinate: { x: -2, z: 0 },
-  resourceCoordinate: { x: 2, z: 0 },
+  entranceCoordinates: [{ x: -2, z: 0 }],
+  resourceCoordinates: [{ x: 2, z: 0 }],
+  exitCoordinates: [{ x: -2, z: 1 }],
   startingTowerCoordinates: [{ x: 0, z: -1 }],
 };
 
@@ -23,6 +24,10 @@ describe('getTileType', () => {
 
   test('marks the level resource coordinate as resource', () => {
     expect(getTileType(testLevel, 2, 0)).toBe(TileType.RESOURCE);
+  });
+
+  test('marks the level exit coordinate as exit', () => {
+    expect(getTileType(testLevel, -2, 1)).toBe(TileType.EXIT);
   });
 
   test('marks level starting tower coordinates as tower', () => {

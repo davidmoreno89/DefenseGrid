@@ -5,7 +5,8 @@ export type GridCoordinate = {
 
 export type LevelDefinition = {
   gridRadius: number;
-  entranceCoordinate: GridCoordinate;
-  resourceCoordinate: GridCoordinate;
+  entranceCoordinates: GridCoordinate[]; // spawn points (≥1)
+  exitCoordinates: GridCoordinate[]; // escape points (may equal entrances)
+  resourceCoordinates: GridCoordinate[]; // treasures to steal (≥1)
   startingTowerCoordinates: GridCoordinate[];
 };
